@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+async function getNotes() {
+  try {
+    const response = await fetch('http://localhost:8080/api/v1/notes');
+
+    const data = await response.json();
+
+    console.log('the data: ', data);
+  } catch (error) {
+    alert(error.message)
+  }
+}
+
 function App() {
+  useEffect(() => {
+  getNotes();    
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
